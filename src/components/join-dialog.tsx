@@ -4,9 +4,11 @@ import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Spinner } from "./spinner";
+import { useUserName } from "@/hooks/useUserName";
 
 export function JoinDialog({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const { name, handleNameChange } = useUserName();
 
   const [roomName, setRoomName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,6 +31,17 @@ export function JoinDialog({ children }: { children: React.ReactNode }) {
               onChange={(e) => setRoomName(e.target.value)}
             />
           </label>
+          <label>
+            <Text as="div" size="2" mb="1" weight="bold">
+              Your name
+            </Text>
+            <TextField.Input
+              type="text"
+              placeholder="你谁"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </label>
         </Flex>
 
         <Flex gap="3" mt="6" justify="end">
@@ -45,10 +58,12 @@ export function JoinDialog({ children }: { children: React.ReactNode }) {
           </Dialog.Close>
 
           <Button
-            disabled={!roomName || loading}
+            disabled={!roomName || !name || loading}
             onClick={() => {
               setLoading(true);
-              router.push(`/watch/${roomName}`);
+              router.push(
+                `/watch/${roomName}?identity=${encodeURIComponent(name)}`
+              );
             }}
           >
             {loading ? (

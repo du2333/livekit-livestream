@@ -13,13 +13,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AllowParticipationInfo } from "./allow-participation-info";
 import { Spinner } from "./spinner";
+import { useUserName } from "@/hooks/useUserName";
 
 export function BroadcastDialog({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const { name, handleNameChange } = useUserName();
 
   const [loading, setLoading] = useState(false);
   const [roomName, setRoomName] = useState("");
-  const [name, setName] = useState("");
   const [enableChat, setEnableChat] = useState(true);
   const [allowParticipation, setAllowParticipation] = useState(true);
 
@@ -70,7 +71,7 @@ export function BroadcastDialog({ children }: { children: React.ReactNode }) {
               type="text"
               placeholder="后村气人主播"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleNameChange}
             />
           </label>
           <Flex direction="column" gap="2">
@@ -105,7 +106,6 @@ export function BroadcastDialog({ children }: { children: React.ReactNode }) {
               color="gray"
               onClick={() => {
                 setRoomName("");
-                setName("");
                 setEnableChat(true);
                 setAllowParticipation(true);
               }}
@@ -113,7 +113,10 @@ export function BroadcastDialog({ children }: { children: React.ReactNode }) {
               Cancel
             </Button>
           </Dialog.Close>
-          <Button disabled={!(roomName && name) || loading} onClick={() => void onGoLive()}>
+          <Button
+            disabled={!(roomName && name) || loading}
+            onClick={() => void onGoLive()}
+          >
             {loading ? (
               <Flex gap="2" align="center">
                 <Spinner />

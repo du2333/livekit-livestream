@@ -5,6 +5,7 @@ import { ReactionBar } from "@/components/reaction-bar";
 import { Spinner } from "@/components/spinner";
 import { StreamPlayer } from "@/components/stream-player";
 import { TokenContext } from "@/components/token-context";
+import { useUserName } from "@/hooks/useUserName";
 import { type JoinStreamResponse } from "@/lib/controller";
 import { cn } from "@/lib/utils";
 import { LiveKitRoom } from "@livekit/components-react";
@@ -28,7 +29,7 @@ export default function WatchPage({
   roomName: string;
   serverUrl: string;
 }) {
-  const [name, setName] = useState("");
+  const { name, handleNameChange } = useUserName();
   const [authToken, setAuthToken] = useState("");
   const [roomToken, setRoomToken] = useState("");
   const [loading, setLoading] = useState(false);
@@ -72,10 +73,10 @@ export default function WatchPage({
                 />
               </TextField.Slot>
               <TextField.Input
-                placeholder="Roger Dunn"
+                placeholder="你谁"
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleNameChange}
               />
             </TextField.Root>
           </label>
