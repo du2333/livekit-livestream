@@ -1,12 +1,11 @@
 "use client";
 
 import { listRooms } from "@/app/actions";
-import { Box, Text } from "@radix-ui/themes";
-import { StreamCard } from "./stream-card";
-import { useState } from "react";
-import { useEffect } from "react";
 import { type ActiveStreamInfo } from "@/lib/controller";
+import { Box } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
 import { Spinner } from "./spinner";
+import { StreamCard } from "./stream-card";
 
 export function ActiveStreamsList() {
   const [streams, setStreams] = useState<ActiveStreamInfo[]>([]);
@@ -29,14 +28,9 @@ export function ActiveStreamsList() {
 
   if (streams.length === 0) {
     return (
-      <Box className="py-12 text-center">
-        <Text size="4" className="text-slate-500">
-          目前没有直播间
-        </Text>
-        <Text className="text-slate-400 mt-2">
-          创建您自己的直播，成为第一个主播！
-        </Text>
-      </Box>
+      <div className="flex justify-center items-center h-full">
+        <h1 className="text-center text-5xl font-bold">没人</h1>
+      </div>
     );
   }
 

@@ -108,7 +108,7 @@ export function IngressDialog({ children }: { children: React.ReactNode }) {
                 </Text>
                 <TextField.Input
                   type="text"
-                  placeholder="abcd-1234"
+                  placeholder="后村大舞台"
                   value={roomName}
                   onChange={(e) => setRoomName(e.target.value)}
                 />
@@ -119,7 +119,7 @@ export function IngressDialog({ children }: { children: React.ReactNode }) {
                 </Text>
                 <TextField.Input
                   type="text"
-                  placeholder="Roger Dunn"
+                  placeholder="后村气人主播"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />

@@ -1,7 +1,7 @@
 import { ActiveStreamsList } from "@/components/active-streams-list";
 import { HomeActions } from "@/components/home-actions";
 import { Separator } from "@/components/ui/separator";
-import { Container, Flex, Heading, Text } from "@radix-ui/themes";
+import { Container, Flex } from "@radix-ui/themes";
 import Image from "next/image";
 
 export default function Home() {
@@ -23,14 +23,6 @@ export default function Home() {
                 <HomeActions />
               </div>
               <Separator className="w-full" />
-              <div className="flex flex-col items-center gap-2">
-                <Heading size="6" align="center" className="mb-2">
-                  直播广场
-                </Heading>
-                <Text align="center" className="text-slate-500 mb-8">
-                  发现正在进行的实时直播，或开始您自己的直播
-                </Text>
-              </div>
 
               <ActiveStreamsList />
             </Flex>

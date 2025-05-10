@@ -3,25 +3,31 @@
 import { BroadcastDialog } from "@/components/broadcast-dialog";
 import { IngressDialog } from "@/components/ingress-dialog";
 import { JoinDialog } from "@/components/join-dialog";
-import { Button, Flex, Text } from "@radix-ui/themes";
+import { Button, Text } from "@radix-ui/themes";
 
 export function HomeActions() {
   return (
-    <Flex direction="column" gap="4" justify="center" align="center">
-      <Flex gap="2">
+    <div className="flex flex-col gap-4 justify-center items-center">
+      <div className="flex gap-2">
         <BroadcastDialog>
-          <Button size="3">Stream from browser</Button>
+          <Button size="3" className="hidden md:block">
+            <span className="hidden sm:block">Stream from browser</span>
+            <span className="block sm:hidden">Browser</span>
+          </Button>
         </BroadcastDialog>
         <IngressDialog>
-          <Button size="3">Stream from OBS</Button>
+          <Button size="3" className="hidden md:block">
+            <span className="hidden sm:block">Stream from OBS</span>
+            <span className="block sm:hidden">OBS</span>
+          </Button>
         </IngressDialog>
-      </Flex>
+      </div>
       <Text size="1">- OR -</Text>
       <JoinDialog>
         <Button variant="outline" size="3" className="w-full">
           Join existing stream
         </Button>
       </JoinDialog>
-    </Flex>
+    </div>
   );
 }
