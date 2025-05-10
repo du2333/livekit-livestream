@@ -1,6 +1,8 @@
 import { Controller } from "@/lib/controller";
-import { Box, Grid, Text } from "@radix-ui/themes";
+import { Box, Text } from "@radix-ui/themes";
 import { StreamCard } from "./stream-card";
+
+export const dynamic = "force-dynamic";
 
 export async function ActiveStreamsList() {
   const controller = new Controller();
