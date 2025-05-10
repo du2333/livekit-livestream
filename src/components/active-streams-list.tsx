@@ -1,7 +1,6 @@
-import { ActiveStreamInfo } from "@/lib/controller";
-import { Box, Grid, Heading, Text } from "@radix-ui/themes";
-import { StreamCard } from "./stream-card";
 import { Controller } from "@/lib/controller";
+import { Box, Grid, Text } from "@radix-ui/themes";
+import { StreamCard } from "./stream-card";
 
 export async function ActiveStreamsList() {
   const controller = new Controller();
@@ -21,16 +20,12 @@ export async function ActiveStreamsList() {
   }
 
   return (
-    <Grid
-      columns={{ initial: "1", xs: "2", sm: "2", md: "3", lg: "4" }}
-      gap="4"
-      width="100%"
-    >
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
       {streams.map((stream) => (
         <Box key={stream.roomName} className="h-full">
           <StreamCard stream={stream} />
         </Box>
       ))}
-    </Grid>
+    </div>
   );
 }
