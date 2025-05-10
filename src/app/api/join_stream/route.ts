@@ -7,7 +7,11 @@ export async function POST(req: Request) {
 
   try {
     const reqBody = await req.json();
-    const response = await controller.joinStream(reqBody as JoinStreamParams);
+    const decodedBody = {
+      identity: reqBody.identity,
+      room_name: decodeURIComponent(reqBody.room_name),
+    };
+    const response = await controller.joinStream(decodedBody as JoinStreamParams);
 
     return Response.json(response);
   } catch (err) {
