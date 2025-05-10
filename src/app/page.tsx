@@ -4,6 +4,7 @@ import Image from "next/image";
 import { HomeActions } from "@/components/home-actions";
 import { ActiveStreamsList } from "@/components/active-streams-list";
 import { Spinner } from "@/components/spinner";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
@@ -15,25 +16,27 @@ export default function Home() {
             alt="LiveKit"
             width="240"
             height="120"
-            className="invert dark:invert-0 mt-8 mb-2"
+            className="mt-8 mb-2"
           />
 
           <div className="w-full max-w-screen-lg">
-            <Flex direction="column" gap="4">
-              <Heading size="6" align="center" className="mb-2">
-                直播广场
-              </Heading>
-              <Text align="center" className="text-slate-500 mb-8">
-                发现正在进行的实时直播，或开始您自己的直播
-              </Text>
+            <Flex direction="column" gap="8">
+              <div className="flex flex-col items-center gap-2">
+                <HomeActions />
+              </div>
+              <Separator className="w-full" />
+              <div className="flex flex-col items-center gap-2">
+                <Heading size="6" align="center" className="mb-2">
+                  直播广场
+                </Heading>
+                <Text align="center" className="text-slate-500 mb-8">
+                  发现正在进行的实时直播，或开始您自己的直播
+                </Text>
+              </div>
 
               <Suspense fallback={<Spinner />}>
                 <ActiveStreamsList />
               </Suspense>
-
-              <Flex justify="center" className="mt-8">
-                <HomeActions />
-              </Flex>
             </Flex>
           </div>
         </Flex>

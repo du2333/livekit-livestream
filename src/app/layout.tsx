@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import { Theme, ThemePanel } from "@radix-ui/themes";
+import { Theme } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning>
       <body className={inter.className}>
         <Theme
           appearance="dark"
@@ -26,7 +26,6 @@ export default function RootLayout({
           radius="none"
         >
           {children}
-          <ThemePanel defaultOpen={false} />
         </Theme>
       </body>
     </html>

@@ -44,14 +44,13 @@ export function StreamCard({ stream }: StreamCardProps) {
       <Card
         className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full w-full"
         style={{
-          borderRadius: "16px",
           cursor: "pointer",
           minWidth: "280px",
         }}
       >
         {/* 直播缩略图区域 - 更大的区域 */}
         <div className="p-0 w-full">
-          <div className="relative bg-slate-100 dark:bg-slate-800 rounded-t-lg overflow-hidden flex justify-center items-center w-full aspect-video">
+          <div className="relative bg-slate-100 overflow-hidden flex justify-center items-center w-full aspect-video">
             {/* 可选：使用用户头像作为直播占位图 */}
             {stream.creatorIdentity ? (
               <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-slate-700/20 to-slate-900/50 flex items-center justify-center">
@@ -67,11 +66,10 @@ export function StreamCard({ stream }: StreamCardProps) {
         </div>
 
         {/* 直播信息 */}
-        <Flex direction="column" gap="3" className="flex-grow p-4">
+        <Flex direction="column" gap="4" className="flex-grow p-4">
           <Heading
             size="3"
             className="line-clamp-2 text-left"
-            style={{ minHeight: "48px" }}
           >
             {stream.roomName}
           </Heading>
@@ -79,7 +77,7 @@ export function StreamCard({ stream }: StreamCardProps) {
           <Flex direction="column" gap="2">
             {/* 主播信息 */}
             <Flex align="center" gap="2">
-              <PersonIcon className="text-slate-500 w-5 h-5" />
+              <PersonIcon className="text-slate-500 size-4" />
               <Text
                 size="2"
                 className="text-slate-700 dark:text-slate-200 font-medium truncate"

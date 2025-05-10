@@ -1,13 +1,12 @@
 import { redirect } from "next/navigation";
 import WatchPageImpl from "./page.client";
 
-interface PageProps {
-  params: {
-    roomName: string;
-  };
-}
-
-export default async function WatchPage({ params: { roomName } }: PageProps) {
+export default async function WatchPage({
+  params,
+}: {
+  params: Promise<{ roomName: string }>;
+}) {
+  const { roomName } = await params;
   if (!roomName) {
     redirect("/");
   }
