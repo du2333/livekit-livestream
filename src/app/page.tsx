@@ -1,10 +1,8 @@
-import { Suspense } from "react";
+import { ActiveStreamsList } from "@/components/active-streams-list";
+import { HomeActions } from "@/components/home-actions";
+import { Separator } from "@/components/ui/separator";
 import { Container, Flex, Heading, Text } from "@radix-ui/themes";
 import Image from "next/image";
-import { HomeActions } from "@/components/home-actions";
-import { ActiveStreamsList } from "@/components/active-streams-list";
-import { Spinner } from "@/components/spinner";
-import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
@@ -34,9 +32,7 @@ export default function Home() {
                 </Text>
               </div>
 
-              <Suspense fallback={<Spinner />}>
-                <ActiveStreamsList />
-              </Suspense>
+              <ActiveStreamsList />
             </Flex>
           </div>
         </Flex>
