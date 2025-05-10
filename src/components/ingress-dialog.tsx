@@ -89,7 +89,7 @@ export function IngressDialog({ children }: { children: React.ReactNode }) {
                 <Button
                   onClick={() =>
                     router.push(
-                      `/watch?at=${ingressResponse.auth_token}&rt=${ingressResponse.connection_details.token}`
+                      `/watch/${roomName}?at=${ingressResponse.auth_token}&rt=${ingressResponse.connection_details.token}`
                     )
                   }
                 >
