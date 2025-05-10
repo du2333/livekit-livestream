@@ -1,6 +1,6 @@
 import {
   Controller,
-  RemoveFromStageParams,
+  type RemoveFromStageParams,
   getSessionFromReq,
 } from "@/lib/controller";
 
@@ -11,8 +11,8 @@ export async function POST(req: Request) {
 
   try {
     const session = getSessionFromReq(req);
-    const reqBody = await req.json();
-    await controller.removeFromStage(session, reqBody as RemoveFromStageParams);
+    const reqBody = (await req.json()) as RemoveFromStageParams;
+    await controller.removeFromStage(session, reqBody);
 
     return Response.json({});
   } catch (err) {

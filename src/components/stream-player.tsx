@@ -1,5 +1,5 @@
 import { useCopyToClipboard } from "@/lib/clipboard";
-import { ParticipantMetadata, RoomMetadata } from "@/lib/controller";
+import { type ParticipantMetadata, type RoomMetadata } from "@/lib/controller";
 import {
   AudioTrack,
   StartAudio,
@@ -16,7 +16,7 @@ import { Avatar, Badge, Button, Flex, Grid, Text } from "@radix-ui/themes";
 import Confetti from "js-confetti";
 import {
   ConnectionState,
-  LocalVideoTrack,
+  type LocalVideoTrack,
   Track,
   createLocalTracks,
 } from "livekit-client";
@@ -37,7 +37,7 @@ function ConfettiCanvas() {
       options.confettiNumber = 12;
     }
 
-    confetti?.addConfetti(options);
+    void confetti?.addConfetti(options);
   });
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function ConfettiCanvas() {
 }
 
 export function StreamPlayer({ isHost = false }) {
-  const [_, copy] = useCopyToClipboard();
+  const [, copy] = useCopyToClipboard();
 
   const [localVideoTrack, setLocalVideoTrack] = useState<LocalVideoTrack>();
   const localVideoEl = useRef<HTMLVideoElement>(null);
@@ -191,7 +191,7 @@ export function StreamPlayer({ isHost = false }) {
               variant="soft"
               disabled={!Boolean(roomName)}
               onClick={() =>
-                copy(`${process.env.NEXT_PUBLIC_SITE_URL}/watch/${roomName}`)
+                void copy(`${process.env.NEXT_PUBLIC_SITE_URL}/watch/${roomName}`)
               }
             >
               {roomState === ConnectionState.Connected ? (
@@ -207,7 +207,7 @@ export function StreamPlayer({ isHost = false }) {
                 <MediaDeviceSettings />
                 {roomMetadata?.creator_identity !==
                   localParticipant.identity && (
-                  <Button size="1" onClick={onLeaveStage}>
+                  <Button size="1" onClick={() => void onLeaveStage()}>
                     Leave stage
                   </Button>
                 )}

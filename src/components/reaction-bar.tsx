@@ -13,7 +13,7 @@ export function ReactionBar() {
   const onSend = (emoji: string) => {
     send(encoder.encode(emoji), { kind: DataPacket_Kind.LOSSY });
     if (sendChat) {
-      sendChat(emoji);
+      void sendChat(emoji);
     }
   };
 

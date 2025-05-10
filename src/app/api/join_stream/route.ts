@@ -1,4 +1,5 @@
-import { Controller, JoinStreamParams } from "@/lib/controller";
+
+import { Controller, type JoinStreamParams } from "@/lib/controller";
 
 // TODO: validate request with Zod
 
@@ -6,7 +7,7 @@ export async function POST(req: Request) {
   const controller = new Controller();
 
   try {
-    const reqBody = await req.json();
+    const reqBody = (await req.json()) as JoinStreamParams;
     const decodedBody = {
       identity: reqBody.identity,
       room_name: decodeURIComponent(reqBody.room_name),

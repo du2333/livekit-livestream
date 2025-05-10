@@ -1,6 +1,6 @@
 "use client";
 
-import { CreateIngressResponse } from "@/lib/controller";
+import { type CreateIngressResponse } from "@/lib/controller";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import {
   Button,
@@ -46,7 +46,7 @@ export function IngressDialog({ children }: { children: React.ReactNode }) {
       }),
     });
 
-    setIngressResponse(await res.json());
+    setIngressResponse((await res.json()) as CreateIngressResponse);
   };
 
   return (
@@ -196,7 +196,7 @@ export function IngressDialog({ children }: { children: React.ReactNode }) {
               </Dialog.Close>
               <Button
                 disabled={!(roomName && name && type) || loading}
-                onClick={onCreateIngress}
+                onClick={() => void onCreateIngress()}
               >
                 {loading ? (
                   <Flex gap="2" align="center">

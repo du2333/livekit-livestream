@@ -1,4 +1,4 @@
-export default async function WatchLayout({
+export default function WatchLayout({
   children,
 }: {
   children: React.ReactNode;

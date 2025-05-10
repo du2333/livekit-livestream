@@ -1,6 +1,6 @@
 "use client";
 
-import { ParticipantMetadata, RoomMetadata } from "@/lib/controller";
+import { type ParticipantMetadata, type RoomMetadata } from "@/lib/controller";
 import {
   useLocalParticipant,
   useParticipants,
@@ -15,7 +15,7 @@ import {
   IconButton,
   Text,
 } from "@radix-ui/themes";
-import { Participant } from "livekit-client";
+import { type Participant } from "livekit-client";
 import { useAuthToken } from "./token-context";
 
 function ParticipantListItem({
@@ -80,17 +80,17 @@ function ParticipantListItem({
         participantMetadata.hand_raised
       ) {
         return (
-          <Button size="1" variant="outline" onClick={onCancel}>
+          <Button size="1" variant="outline" onClick={() => void onCancel()}>
             Remove
           </Button>
         );
       } else if (participantMetadata.hand_raised) {
         return (
           <Flex gap="2">
-            <Button size="1" onClick={onInvite}>
+            <Button size="1" onClick={() => void onInvite()}>
               Accept
             </Button>
-            <Button size="1" variant="outline" onClick={onCancel}>
+            <Button size="1" variant="outline" onClick={() => void onCancel()}>
               Reject
             </Button>
           </Flex>
@@ -103,7 +103,7 @@ function ParticipantListItem({
         );
       } else if (!participantMetadata.invited_to_stage) {
         return (
-          <Button size="1" onClick={onInvite}>
+          <Button size="1" onClick={() => void onInvite()}>
             Invite to stage
           </Button>
         );
@@ -118,7 +118,7 @@ function ParticipantListItem({
         participantMetadata.hand_raised
       ) {
         return (
-          <Button size="1" onClick={onCancel}>
+          <Button size="1" onClick={() => void onCancel()}>
             Leave stage
           </Button>
         );
@@ -128,10 +128,10 @@ function ParticipantListItem({
       ) {
         return (
           <Flex gap="2">
-            <Button size="1" onClick={onRaiseHand}>
+            <Button size="1" onClick={() => void onRaiseHand()}>
               Accept
             </Button>
-            <Button size="1" variant="outline" onClick={onCancel}>
+            <Button size="1" variant="outline" onClick={() => void onCancel()}>
               Reject
             </Button>
           </Flex>
@@ -141,7 +141,7 @@ function ParticipantListItem({
         participantMetadata.hand_raised
       ) {
         return (
-          <Button size="1" variant="outline" onClick={onCancel}>
+          <Button size="1" variant="outline" onClick={() => void onCancel()}>
             Cancel
           </Button>
         );
@@ -150,7 +150,7 @@ function ParticipantListItem({
         !participantMetadata.hand_raised
       ) {
         return (
-          <Button size="1" onClick={onRaiseHand}>
+          <Button size="1" onClick={() => void onRaiseHand()}>
             Raise hand
           </Button>
         );

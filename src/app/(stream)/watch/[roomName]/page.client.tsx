@@ -5,7 +5,7 @@ import { ReactionBar } from "@/components/reaction-bar";
 import { Spinner } from "@/components/spinner";
 import { StreamPlayer } from "@/components/stream-player";
 import { TokenContext } from "@/components/token-context";
-import { JoinStreamResponse } from "@/lib/controller";
+import { type JoinStreamResponse } from "@/lib/controller";
 import { cn } from "@/lib/utils";
 import { LiveKitRoom } from "@livekit/components-react";
 import { ArrowRightIcon, PersonIcon } from "@radix-ui/react-icons";
@@ -80,7 +80,7 @@ export default function WatchPage({
             </TextField.Root>
           </label>
           <Flex gap="3" mt="6" justify="end">
-            <Button disabled={!name || loading} onClick={onJoin}>
+            <Button disabled={!name || loading} onClick={() => void onJoin()}>
               {loading ? (
                 <Flex gap="2" align="center">
                   <Spinner />

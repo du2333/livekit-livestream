@@ -1,6 +1,6 @@
 "use client";
 
-import { CreateStreamResponse } from "@/lib/controller";
+import { type CreateStreamResponse } from "@/lib/controller";
 import {
   Button,
   Dialog,
@@ -113,7 +113,7 @@ export function BroadcastDialog({ children }: { children: React.ReactNode }) {
               Cancel
             </Button>
           </Dialog.Close>
-          <Button disabled={!(roomName && name) || loading} onClick={onGoLive}>
+          <Button disabled={!(roomName && name) || loading} onClick={() => void onGoLive()}>
             {loading ? (
               <Flex gap="2" align="center">
                 <Spinner />

@@ -3,14 +3,14 @@
 import jwt from "jsonwebtoken";
 import {
   AccessToken,
-  CreateIngressOptions,
+  type CreateIngressOptions,
   IngressAudioEncodingPreset,
   IngressClient,
-  IngressInfo,
+  type IngressInfo,
   IngressInput,
   IngressVideoEncodingPreset,
-  ParticipantInfo,
-  ParticipantPermission,
+  type ParticipantInfo,
+  type ParticipantPermission,
   RoomServiceClient,
 } from "livekit-server-sdk";
 import { TrackSource } from "livekit-server-sdk/dist/proto/livekit_models";
@@ -120,8 +120,8 @@ export class Controller {
     this.ingressService = new IngressClient(httpUrl);
     this.roomService = new RoomServiceClient(
       httpUrl,
-      process.env.LIVEKIT_API_KEY!,
-      process.env.LIVEKIT_API_SECRET!
+      process.env.LIVEKIT_API_KEY,
+      process.env.LIVEKIT_API_SECRET
     );
   }
 
@@ -140,7 +140,7 @@ export class Controller {
 
         try {
           if (room.metadata) {
-            metadata = JSON.parse(room.metadata);
+            metadata = JSON.parse(room.metadata) as RoomMetadata;
           }
         } catch (e) {
           console.error("Error parsing room metadata:", e);
@@ -209,8 +209,8 @@ export class Controller {
     // Create viewer access token
 
     const at = new AccessToken(
-      process.env.LIVEKIT_API_KEY!,
-      process.env.LIVEKIT_API_SECRET!,
+      process.env.LIVEKIT_API_KEY,
+      process.env.LIVEKIT_API_SECRET,
       {
         identity: metadata.creator_identity,
       }
@@ -244,8 +244,8 @@ export class Controller {
     room_name: roomName,
   }: CreateStreamParams): Promise<CreateStreamResponse> {
     const at = new AccessToken(
-      process.env.LIVEKIT_API_KEY!,
-      process.env.LIVEKIT_API_SECRET!,
+      process.env.LIVEKIT_API_KEY,
+      process.env.LIVEKIT_API_SECRET,
       {
         identity: metadata.creator_identity,
       }
@@ -314,8 +314,8 @@ export class Controller {
     }
 
     const at = new AccessToken(
-      process.env.LIVEKIT_API_KEY!,
-      process.env.LIVEKIT_API_SECRET!,
+      process.env.LIVEKIT_API_KEY,
+      process.env.LIVEKIT_API_SECRET,
       {
         identity,
       }

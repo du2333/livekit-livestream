@@ -1,5 +1,5 @@
-import { ActiveStreamInfo } from "@/lib/controller";
-import { Box, Card, Flex, Heading, Text } from "@radix-ui/themes";
+import { type ActiveStreamInfo } from "@/lib/controller";
+import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import { PersonIcon, VideoIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
@@ -67,10 +67,7 @@ export function StreamCard({ stream }: StreamCardProps) {
 
         {/* 直播信息 */}
         <Flex direction="column" gap="4" className="flex-grow p-4">
-          <Heading
-            size="3"
-            className="line-clamp-2 text-left"
-          >
+          <Heading size="3" className="line-clamp-2 text-left">
             {stream.roomName}
           </Heading>
 

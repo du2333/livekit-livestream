@@ -1,6 +1,6 @@
 import {
   Controller,
-  InviteToStageParams,
+  type InviteToStageParams,
   getSessionFromReq,
 } from "@/lib/controller";
 
@@ -11,8 +11,8 @@ export async function POST(req: Request) {
 
   try {
     const session = getSessionFromReq(req);
-    const reqBody = await req.json();
-    await controller.inviteToStage(session, reqBody as InviteToStageParams);
+    const reqBody = (await req.json()) as InviteToStageParams;
+    await controller.inviteToStage(session, reqBody);
 
     return Response.json({});
   } catch (err) {

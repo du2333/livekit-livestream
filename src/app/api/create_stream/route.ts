@@ -1,4 +1,4 @@
-import { Controller, CreateStreamParams } from "@/lib/controller";
+import { Controller, type CreateStreamParams } from "@/lib/controller";
 
 // TODO: validate request with Zod
 
@@ -6,9 +6,9 @@ export async function POST(req: Request) {
   const controller = new Controller();
 
   try {
-    const reqBody = await req.json();
+    const reqBody = (await req.json()) as CreateStreamParams;
     const response = await controller.createStream(
-      reqBody as CreateStreamParams
+      reqBody
     );
 
     return Response.json(response);

@@ -1,8 +1,8 @@
 "use client";
 
-import { RoomMetadata } from "@/lib/controller";
+import { type RoomMetadata } from "@/lib/controller";
 import {
-  ReceivedChatMessage,
+  type ReceivedChatMessage,
   useChat,
   useLocalParticipant,
   useRoomInfo,
@@ -102,12 +102,12 @@ export function Chat() {
               onKeyUp={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
-                  onSend();
+                  void onSend();
                 }
               }}
             />
           </Box>
-          <IconButton onClick={onSend} disabled={!draft.trim().length}>
+          <IconButton onClick={() => void onSend()} disabled={!draft.trim().length}>
             <PaperPlaneIcon />
           </IconButton>
         </Flex>
