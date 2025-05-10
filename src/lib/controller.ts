@@ -87,6 +87,14 @@ export type ErrorResponse = {
   error: string;
 };
 
+export type ActiveStreamInfo = {
+  roomName: string;
+  creatorIdentity: string;
+  participantCount: number;
+  metadata: RoomMetadata;
+  creationTime: number;
+};
+
 export function getSessionFromReq(req: Request): Session {
   const authHeader = req.headers.get("authorization");
   const token = authHeader?.split(" ")[1];
@@ -115,6 +123,43 @@ export class Controller {
       process.env.LIVEKIT_API_KEY!,
       process.env.LIVEKIT_API_SECRET!
     );
+  }
+
+  async listActiveStreams(): Promise<ActiveStreamInfo[]> {
+    try {
+      // 使用RoomServiceClient获取所有房间
+      const rooms = await this.roomService.listRooms();
+
+      // 将房间信息转换为前端所需的格式
+      return rooms.map((room) => {
+        let metadata: RoomMetadata = {
+          creator_identity: "",
+          enable_chat: false,
+          allow_participation: false,
+        };
+
+        try {
+          if (room.metadata) {
+            metadata = JSON.parse(room.metadata);
+          }
+        } catch (e) {
+          console.error("Error parsing room metadata:", e);
+        }
+
+        return {
+          roomName: room.name,
+          creatorIdentity: metadata.creator_identity,
+          participantCount: room.numParticipants,
+          metadata: metadata,
+          creationTime: room.creationTime
+            ? new Date(room.creationTime).getTime()
+            : Date.now(),
+        };
+      });
+    } catch (error) {
+      console.error("Error listing active streams:", error);
+      return [];
+    }
   }
 
   async createIngress({

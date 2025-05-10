@@ -1,12 +1,15 @@
-import { HomeActions } from "@/components/home-actions";
-import { Container, Flex } from "@radix-ui/themes";
+import { Suspense } from "react";
+import { Container, Flex, Heading, Text } from "@radix-ui/themes";
 import Image from "next/image";
+import { HomeActions } from "@/components/home-actions";
+import { ActiveStreamsList } from "@/components/active-streams-list";
+import { Spinner } from "@/components/spinner";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center gap-12 p-10 sm:p-24">
-      <Container size="1">
-        <Flex direction="column" align="center" gap="5">
+      <Container size="3">
+        <Flex direction="column" align="center" gap="8">
           <Image
             src="/wordmark.svg"
             alt="LiveKit"
@@ -14,7 +17,25 @@ export default function Home() {
             height="120"
             className="invert dark:invert-0 mt-8 mb-2"
           />
-          <HomeActions />
+
+          <div className="w-full max-w-screen-lg">
+            <Flex direction="column" gap="4">
+              <Heading size="6" align="center" className="mb-2">
+                直播广场
+              </Heading>
+              <Text align="center" className="text-slate-500 mb-8">
+                发现正在进行的实时直播，或开始您自己的直播
+              </Text>
+
+              <Suspense fallback={<Spinner />}>
+                <ActiveStreamsList />
+              </Suspense>
+
+              <Flex justify="center" className="mt-8">
+                <HomeActions />
+              </Flex>
+            </Flex>
+          </div>
         </Flex>
       </Container>
     </main>
