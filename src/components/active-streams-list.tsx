@@ -1,10 +1,18 @@
-import { Controller } from "@/lib/controller";
+"use client";
+
+import { listRooms } from "@/app/actions";
 import { Box, Text } from "@radix-ui/themes";
 import { StreamCard } from "./stream-card";
+import { useState } from "react";
+import { useEffect } from "react";
+import { type ActiveStreamInfo } from "@/lib/controller";
 
-export async function ActiveStreamsList() {
-  const controller = new Controller();
-  const streams = await controller.listActiveStreams();
+export function ActiveStreamsList() {
+  const [streams, setStreams] = useState<ActiveStreamInfo[]>([]);
+
+  useEffect(() => {
+    void listRooms().then(setStreams);
+  }, []);
 
   if (streams.length === 0) {
     return (
