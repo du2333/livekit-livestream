@@ -12,7 +12,6 @@ import { LiveKitRoom } from "@livekit/components-react";
 import { ArrowRightIcon, PersonIcon } from "@radix-ui/react-icons";
 import {
   Avatar,
-  Box,
   Button,
   Card,
   Flex,
@@ -55,7 +54,7 @@ export default function WatchPage({
 
   if (!authToken || !roomToken) {
     return (
-      <Flex align="center" justify="center" className="min-h-screen">
+      <div className="flex items-center justify-center min-h-screen">
         <Card className="p-3 w-[380px]">
           <Heading size="4" className="mb-4">
             Entering {decodeURI(roomName)}
@@ -80,7 +79,7 @@ export default function WatchPage({
               />
             </TextField.Root>
           </label>
-          <Flex gap="3" mt="6" justify="end">
+          <div className="flex gap-3 mt-6 justify-end">
             <Button disabled={!name || loading} onClick={() => void onJoin()}>
               {loading ? (
                 <Flex gap="2" align="center">
@@ -94,26 +93,26 @@ export default function WatchPage({
                 </>
               )}
             </Button>
-          </Flex>
+          </div>
         </Card>
-      </Flex>
+      </div>
     );
   }
 
   return (
     <TokenContext.Provider value={authToken}>
       <LiveKitRoom serverUrl={serverUrl} token={roomToken}>
-        <Flex className="w-full h-screen">
-          <Flex direction="column" className="flex-1">
-            <Box className="flex-1 bg-gray-1">
+        <div className="w-full h-screen flex flex-col md:flex-row">
+          <div className="flex-1 flex flex-col h-[60vh] md:h-auto">
+            <div className="relative flex-1 bg-gray-1">
               <StreamPlayer />
-            </Box>
+            </div>
             <ReactionBar />
-          </Flex>
-          <Box className="bg-accent-2 min-w-[280px] border-l border-accent-5">
+          </div>
+          <div className="bg-accent-2 md:min-w-[280px] md:max-w-[350px] md:w-1/4 border-l border-accent-5 h-[40vh] md:h-screen overflow-y-auto">
             <Chat />
-          </Box>
-        </Flex>
+          </div>
+        </div>
       </LiveKitRoom>
     </TokenContext.Provider>
   );
