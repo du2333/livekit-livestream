@@ -9,8 +9,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { roomName } = await params;
   return {
-    title: `直播间 | ${roomName}`,
-    description: `直播 - ${roomName}`,
+    title: roomName,
+    description: `直播房间：${roomName}`,
   };
 }
 

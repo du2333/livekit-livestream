@@ -7,8 +7,11 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "黑黑黑",
-  description: "A sample full-stack application built with LiveKit",
+  title: {
+    default: "后村大舞台",
+    template: "%s | 后村大舞台",
+  },
+  description: "后村大舞台，有才你就来",
 };
 
 export default function RootLayout({
