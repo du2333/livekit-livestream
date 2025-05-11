@@ -191,7 +191,7 @@ export function StreamPlayer({ isHost = false }) {
     // 设置新的定时器
     const timeout = setTimeout(() => {
       setControlsVisible(false);
-    }, 1500); // 1.5秒后隐藏
+    }, 3000); // 3秒后隐藏
 
     setControlsTimeout(timeout);
   };
@@ -574,10 +574,7 @@ export function StreamPlayer({ isHost = false }) {
         className="absolute inset-0 z-0"
         onClick={() => {
           showControls();
-          // 如果控件可见且已暂停，点击播放
-          if (paused) {
-            setPaused(false);
-          }
+          // 移除自动恢复播放的逻辑，只显示控制栏
         }}
       />
     </div>
